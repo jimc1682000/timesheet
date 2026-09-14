@@ -1,0 +1,63 @@
+# ~/.config/timesheet/config.yaml
+# 各人自己一份。團隊可以另外維護 template，但這份是你的。
+
+me:
+  name: "Your Name"          # 出現在卡鐘檔名、git author、追蹤系統的名字
+  git_author: "yourname"     # git log --author 用
+
+period:
+  week_starts: monday
+  split_at_month_boundary: true   # 跨月時月底那幾天自成一欄
+
+hours:
+  source:                    # 依序找，找不到往下
+    - kind: records-json
+      path_glob: "~/work/attendance/attendance_*.json"
+      fields:                # 你的 json 欄位名對到這五個
+        scheduled: scheduledTime
+        actual: actualTime
+        type: type           # 上班 / 下班
+        status: status       # 遲到 / 早退 / 曠職…
+        leave_type: leaveType
+    - kind: fhr-txt
+      path_glob: "~/work/attendance/*-出勤資料.txt"
+  fallback_weekly: 40
+  lunch_hours: 1
+  count_as_work:             # 這些假別當整天上班
+    - remote_work
+    - forgot_punch
+    - training_leave
+
+evidence:
+  tracker:
+    enabled: true
+    kind: mcp
+    tools:
+      list_tasks: "mcp__tracker__list_tasks"   # 換成你的追蹤系統 MCP 工具名
+    person_id: "0"
+  calendar:
+    enabled: true
+    kind: mcp
+    only_accepted: true
+  jira:
+    enabled: false
+    cli: jira
+    jql: "(assignee was currentUser() OR watcher = currentUser()) AND updated >= {since}"
+  git:
+    enabled: true
+    roots:
+      - "~/src/git.example.com"
+  slack:
+    enabled: false
+    only_self: true
+
+output:
+  dir: "~/work/timesheet"
+  draft_md: true
+  tsv: true
+  round_to: 0.25
+  rows_per_week: [4, 6]
+  sheet:
+    enabled: false
+    id: ""
+    block: "部門 : Your-Team"     # 表裡那個區塊的標題列

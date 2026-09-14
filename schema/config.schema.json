@@ -1,0 +1,123 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jimc1682000/timesheet/schema/config.schema.json",
+  "title": "timesheet config",
+  "type": "object",
+  "required": ["me", "hours", "evidence", "output"],
+  "properties": {
+    "me": {
+      "type": "object",
+      "required": ["name"],
+      "properties": {
+        "name": { "type": "string" },
+        "git_author": { "type": "string" }
+      }
+    },
+    "period": {
+      "type": "object",
+      "properties": {
+        "week_starts": { "enum": ["monday", "sunday"], "default": "monday" },
+        "split_at_month_boundary": { "type": "boolean", "default": true }
+      }
+    },
+    "hours": {
+      "type": "object",
+      "required": ["fallback_weekly"],
+      "properties": {
+        "source": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["kind"],
+            "properties": {
+              "kind": { "enum": ["records-json", "fhr-txt"] },
+              "path_glob": { "type": "string" },
+              "fields": {
+                "type": "object",
+                "properties": {
+                  "scheduled": { "type": "string" },
+                  "actual": { "type": "string" },
+                  "type": { "type": "string" },
+                  "status": { "type": "string" },
+                  "leave_type": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "fallback_weekly": { "type": "number", "minimum": 0 },
+        "lunch_hours": { "type": "number", "default": 1 },
+        "count_as_work": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "tracker": { "$ref": "#/$defs/mcpSource" },
+        "calendar": {
+          "allOf": [
+            { "$ref": "#/$defs/mcpSource" },
+            { "properties": { "only_accepted": { "type": "boolean", "default": true } } }
+          ]
+        },
+        "jira": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "cli": { "type": "string" },
+            "jql": { "type": "string" }
+          }
+        },
+        "git": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "roots": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "slack": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean" },
+            "only_self": { "type": "boolean", "const": true }
+          }
+        }
+      }
+    },
+    "output": {
+      "type": "object",
+      "required": ["dir"],
+      "properties": {
+        "dir": { "type": "string" },
+        "draft_md": { "type": "boolean", "default": true },
+        "tsv": { "type": "boolean", "default": true },
+        "round_to": { "type": "number", "default": 0.25 },
+        "rows_per_week": {
+          "type": "array",
+          "items": { "type": "integer", "minimum": 1 },
+          "minItems": 2,
+          "maxItems": 2
+        },
+        "sheet": {
+          "type": "object",
+          "properties": {
+            "enabled": { "type": "boolean", "default": false },
+            "id": { "type": "string" },
+            "block": { "type": "string" }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "mcpSource": {
+      "type": "object",
+      "properties": {
+        "enabled": { "type": "boolean" },
+        "kind": { "const": "mcp" },
+        "tools": { "type": "object", "additionalProperties": { "type": "string" } },
+        "person_id": { "type": "string" }
+      }
+    }
+  }
+}

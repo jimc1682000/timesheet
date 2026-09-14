@@ -1,0 +1,11 @@
+{
+  "name": "timesheet",
+  "owner": { "name": "jimc1682000" },
+  "plugins": [
+    {
+      "name": "timesheet",
+      "source": "./",
+      "description": "Weekly hours split into a few key tasks with category tagging"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/jimc1682000/timesheet/schema/ledger.schema.json",
+  "title": "timesheet ledger",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "required": ["id", "category", "decided"],
+    "properties": {
+      "id": { "type": "string", "description": "工單識別，如 TRACKER#567 或 JIRA-2213" },
+      "category": { "type": "string" },
+      "decided": { "type": "string", "format": "date" },
+      "note": { "type": "string" }
+    }
+  }
+}

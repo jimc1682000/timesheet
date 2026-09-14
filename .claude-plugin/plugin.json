@@ -1,0 +1,6 @@
+{
+  "name": "timesheet",
+  "description": "Weekly hours split into a few key tasks with category tagging; drafts for human approval, TSV output, optional sheet write",
+  "version": "0.1.0",
+  "author": { "name": "Jimmy Chen" }
+}

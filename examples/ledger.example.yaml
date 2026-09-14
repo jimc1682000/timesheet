@@ -1,0 +1,16 @@
+# ~/.config/timesheet/ledger.yaml
+# 工單 → 分類。skill 在人批准草稿後寫入，之後同一工單沿用，不再問。
+# 被問「為什麼這個算 X」時，答案就是這裡的那一行。
+
+- id: "TRACKER#567"
+  category: venture
+  decided: 2026-09-14
+  note: "事故後排進優先的架構升級，使用者拍板"
+- id: "JIRA-2213"
+  category: venture
+  decided: 2026-09-14
+  note: "同上一個工單"
+- id: "TRACKER#411"
+  category: core
+  decided: 2026-09-14
+  note: "工單標題自帶 [Legacy]"

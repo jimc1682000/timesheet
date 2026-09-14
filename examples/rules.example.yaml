@@ -1,0 +1,22 @@
+# ~/.config/timesheet/rules.yaml
+# skill 從 ledger 歸納後提議修改，人點頭才寫。分類名稱自訂，數量不限。
+
+categories: [venture, core]
+
+keywords:
+  venture:
+    - "live event"
+    - "new-product"
+  core:
+    - "IAM"
+    - "credential cleanup"
+    - "package registry"
+
+meetings:
+  default: venture           # 會議、課程、workshop 沒特別說就進這類
+  exceptions:
+    core:
+      - "Monthly update"
+      - "AWS training"
+
+unknown: ask                 # 都沒命中 → 草稿標 ?，一次問完
