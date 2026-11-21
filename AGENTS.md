@@ -6,9 +6,9 @@
 
 ## 驗證
 
-目前沒有自動檢查。改動 `schema/` 或 `examples/` 時，確認每個範例仍符合同名 schema；改動流程、估時或輸出時，同步更新 README 對應段落。
+目前沒有自動檢查。改動 `schema/` 或 `examples/` 時，確認每個範例仍符合同名 schema。
 
 ## 邊界
 
 - 這是 public repo，也是 plugin 來源（`.claude-plugin/marketplace.json` 的 `source` 是 `./`），根目錄檔案會隨 plugin 安裝；只放範例，不放個人設定或真實工時資料。
-- 使用者設定放在各人的 `~/.config/timesheet/`，repo 只提供範例與 schema。
+- 使用者設定由各人在自己的設定目錄維護（位置見 [README.md](README.md) 的「設定」），repo 只提供範例與 schema。
